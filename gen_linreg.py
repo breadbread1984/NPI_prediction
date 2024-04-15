@@ -29,7 +29,7 @@ def main(unused_argv):
     combinations.append((N,I,P))
   if (FLAGS.n,FLAGS.i,FLAGS.p) not in combinations:
     raise Exception('unknown combination!')
-  with open(join(FLAGS.model, 'n%.6fi%.6fp%.6f.pkl' % (FLAGS.n, FLAGS.i, FLAGS.p))) as f:
+  with open(join(FLAGS.model, 'n%.6fi%.6fp%.6f.pkl' % (FLAGS.n, FLAGS.i, FLAGS.p)), 'rb') as f:
     reg = pickle.loads(f.read())
   X = np.linspace(-2, 2, 41)
   Y = reg.predict(x)
