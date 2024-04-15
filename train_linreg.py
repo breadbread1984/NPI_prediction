@@ -19,7 +19,7 @@ def main(unused_argv):
   mkdir(FLAGS.output)
   with open(FLAGS.input, 'rb') as f:
     samples = pickle.loads(f.read())
-  for (N,I,P), data in samples.items():
+  for (N,P,I), data in samples.items():
     data = np.array(data) # data.shape = (n,2)
     X = data[:,:1]
     Y = data[:,1:]
