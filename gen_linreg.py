@@ -10,6 +10,7 @@ import numpy as np
 FLAGS = flags.FLAGS
 
 def add_options():
+  flags.DEFINE_string('sample', default = None, help = 'path to training samples')
   flags.DEFINE_string('model', default = 'models', help = 'path to directory containing models')
   flags.DEFINE_float('n', default = 0.25, help = 'N')
   flags.DEFINE_float('i', default = 0.25, help = 'I')
@@ -39,7 +40,12 @@ def main(unused_argv):
         f.write('%f,%f\n' % (x,y))
   elif FLAGS.format == 'png':
     import matplotlib.pyplot as plt
-    plt.plot(X,Y)
+    plt.plot(X, Y, label = 'prediction')
+    if FLAGS.sample not None:
+      with open(FLAGS.sample,'rb') as f:
+        samples = pickle.loads(f.read())
+      xy = np.array(samples[(FLAGS.n, FLAGS.p, FLAGS.i)])
+      plt.plot(xy[:,0], xy[:,1], label = 'ground truth')
     plt.savefig('results.png')
 
 if __name__ == "__main__":
