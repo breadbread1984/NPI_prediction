@@ -30,7 +30,7 @@ def main(unused_argv):
   X, idx = np.unique(X, return_index = True, axis = 0)
   Y = Y[idx]
   np.savez('dataset.npz', x = X, y = Y)
-  model = make_pipeline(PolynomialFeatures(7), LinearRegression())
+  model = make_pipeline(PolynomialFeatures(15), LinearRegression())
   model.fit(X,Y)
   with open(FLAGS.output,'wb') as f:
     f.write(pickle.dumps(model))
