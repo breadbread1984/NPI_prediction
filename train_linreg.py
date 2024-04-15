@@ -6,6 +6,8 @@ from os.path import exists, join
 import pickle
 from absl import flags, app
 import numpy as np
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import RANSACRegressor
 
 FLAGS = flags.FLAGS
@@ -23,10 +25,11 @@ def main(unused_argv):
     data = np.array(data) # data.shape = (n,2)
     X = data[:,:1]
     Y = data[:,1:]
-    reg = RANSACRegressor().fit(X,Y)
+    model = make_pipeline(StandardScaler(), RANSACRegressor())
+    reg = model.fit(X,Y)
     print("(%f,%f,%f) regression score: %f" % (N,I,P,reg.score(X,Y)))
     with open(join(FLAGS.output, 'n%fi%fp%f.pkl' % (N,I,P)),'wb') as f:
-      f.write(pickle.dumps(reg))
+      f.write(pickle.dumps(model))
 
 if __name__ == "__main__":
   add_options()
