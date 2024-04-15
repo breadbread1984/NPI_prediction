@@ -7,8 +7,8 @@ import pickle
 from absl import flags, app
 import numpy as np
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVR
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import HuberRegressor
 
 FLAGS = flags.FLAGS
 
@@ -30,7 +30,7 @@ def main(unused_argv):
   X, idx = np.unique(X, return_index = True, axis = 0)
   Y = Y[idx]
   np.savez('dataset.npz', x = X, y = Y)
-  model = SVR(kernel = 'sigmoid', C = 1.0, epsilon = 0.2)
+  model = make_pipeline(PolynomialFeatures(3), HuberRegressor())
   model.fit(X,Y)
   with open(FLAGS.output,'wb') as f:
     f.write(pickle.dumps(model))
