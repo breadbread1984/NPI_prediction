@@ -12,7 +12,7 @@ FLAGS = flags.FLAGS
 def add_options():
   flags.DEFINE_string('model', default = 'models', help = 'path to directory containing models')
   flags.DEFINE_float('n', default = 0.25, help = 'N')
-  flags.DEFINE_float('i', default = 0.23, help = 'I')
+  flags.DEFINE_float('i', default = 0.25, help = 'I')
   flags.DEFINE_float('p', default = 0.005, help = 'P')
   flags.DEFINE_enum('format', default = 'csv', enum_values = {'csv', 'png'}, help = 'output format')
 
@@ -29,7 +29,7 @@ def main(unused_argv):
     combinations.append((N,I,P))
   if (FLAGS.n,FLAGS.i,FLAGS.p) not in combinations:
     raise Exception('unknown combination!')
-  with open(join(FLAGS.model, '%.6f%.6f%.6f.pkl' % (FLAGS.n, FLAGS.i, FLAGS.p))) as f:
+  with open(join(FLAGS.model, 'n%.6fi%.6fp%.6f.pkl' % (FLAGS.n, FLAGS.i, FLAGS.p))) as f:
     reg = pickle.loads(f.read())
   X = np.linspace(-2, 2, 41)
   Y = reg.predict(x)
