@@ -19,6 +19,6 @@ python3 train_linreg.py --input samples.pkl --output models
 ## generate curve
 
 ```shell
-python3 gen_linreg.py --n <N> --i <I> --p <P>
+python3 gen_linreg.py --n <N> --i <I> --p <P> --format (csv|png)
 ```
 
