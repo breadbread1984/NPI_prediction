@@ -23,7 +23,7 @@ def main(unused_argv):
   X = np.expand_dims(np.linspace(-2, 2, 41), axis = -1) # X.shape = (48, 1)
   npi = np.tile(np.expand_dims(np.array([FLAGS.n, FLAGS.p, FLAGS.i]), axis = 0), (X.shape[0],1)) # npi.shape = (48, 3,)
   inputs = np.concatenate([npi, X], axis = -1) # inputs.shape = (48, 4)
-  Y = reg.predict(X)
+  Y = reg.predict(inputs)
   if FLAGS.format == 'csv':
     with open('results.csv', 'w') as f:
       for x,y in zip(X,Y):
