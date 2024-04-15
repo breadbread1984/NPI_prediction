@@ -27,11 +27,11 @@ def main(unused_argv):
         for i in range(len(row)//2):
           head = row[i * 2]
           res = p.search(head)
-          n = float(res.group(1))
-          p = float(res.group(2))
-          i = float(res.group(3))
-          samples[(n,p,i)] = list()
-          keys.append((n,p,i))
+          N = float(res.group(1))
+          P = float(res.group(2))
+          I = float(res.group(3))
+          samples[(N,P,I)] = list()
+          keys.append((N,P,I))
       else:
         for i in range(len(row)//2):
           x = float(row[i * 2])
