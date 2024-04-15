@@ -31,8 +31,8 @@ def main(unused_argv):
     raise Exception('unknown combination!')
   with open(join(FLAGS.model, 'n%.6fi%.6fp%.6f.pkl' % (FLAGS.n, FLAGS.i, FLAGS.p)), 'rb') as f:
     reg = pickle.loads(f.read())
-  X = np.linspace(-2, 2, 41)
-  Y = reg.predict(x)
+  X = np.expand_dims(np.linspace(-2, 2, 41), axis = -1)
+  Y = reg.predict(X)
   if FLAGS.format == 'csv':
     with open('results.csv', 'w') as f:
       for x,y in zip(X,Y):
