@@ -8,7 +8,7 @@ from absl import flags, app
 import numpy as np
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import HuberRegressor
+from sklearn.linear_model import LinearRegression
 
 FLAGS = flags.FLAGS
 
@@ -24,13 +24,13 @@ def main(unused_argv):
     data = np.array(data) # data.shape = (n,2)
     npi = np.tile(np.expand_dims(np.array([N,P,I]), axis = 0), (data.shape[0],1)) # npi.shape = (n, 3)
     x = np.concatenate([npi, data[:,:1]], axis = -1) # x.shape = (n, 4)
-    y = data[:,1] # y.shape = (n, 1)
+    y = data[:,1] # y.shape = (n,)
     X = np.concatenate([X, x], axis = 0)
     Y = np.concatenate([Y, y], axis = 0)
   X, idx = np.unique(X, return_index = True, axis = 0)
   Y = Y[idx]
   np.savez('dataset.npz', x = X, y = Y)
-  model = make_pipeline(PolynomialFeatures(3), HuberRegressor())
+  model = make_pipeline(PolynomialFeatures(7), LinearRegression())
   model.fit(X,Y)
   with open(FLAGS.output,'wb') as f:
     f.write(pickle.dumps(model))
