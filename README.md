@@ -19,6 +19,6 @@ python3 train.py --input samples.pkl --output model.pkl
 ## generate curve
 
 ```shell
-python3 eval.py --n <N> --i <I> --p <P> --format (csv|png)
+python3 eval.py --n <N> --i <I> --p <P> --format (csv|png) [--sample samples.pkl]
 ```
 
