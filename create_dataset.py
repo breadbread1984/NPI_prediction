@@ -34,8 +34,11 @@ def main(unused_argv):
           keys.append((N,P,I))
       else:
         for i in range(len(row)//2):
-          x = float(row[i * 2])
-          y = float(row[i * 2 + 1])
+          try:
+            x = float(row[i * 2])
+            y = float(row[i * 2 + 1])
+          except:
+            continue
           key = keys[i]
           samples[key].append((x,y))
   with open("samples.pkl", 'wb') as f:
