@@ -13,12 +13,12 @@ python3 create_dataset.py --input <path to directory containing csv>
 ## train with linear regression
 
 ```shell
-python3 train_linreg.py --input samples.pkl --output models
+python3 train.py --input samples.pkl --output model.pkl
 ```
 
 ## generate curve
 
 ```shell
-python3 gen_linreg.py --n <N> --i <I> --p <P> --format (csv|png)
+python3 eval.py --n <N> --i <I> --p <P> --format (csv|png)
 ```
 
