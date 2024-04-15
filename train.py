@@ -27,7 +27,7 @@ def main(unused_argv):
     y = data[:,1] # y.shape = (n, 1)
     X = np.concatenate([X, x], axis = 0)
     Y = np.concatenate([Y, y], axis = 0)
-  print(X.shape, Y.shape)
+  np.savez('dataset.npz', x = X, y = Y)
   model = SVR(C = 1.0, epsilon = 0.2)
   model.fit(X,Y)
   with open(FLAGS.output,'wb') as f:
