@@ -26,7 +26,7 @@ def main(unused_argv):
       if idx == 0:
         for i in range(len(row)//2):
           head = row[i * 2]
-          res = p.match(head)
+          res = p.search(head)
           n = float(res.group(1))
           p = float(res.group(2))
           i = float(res.group(3))
