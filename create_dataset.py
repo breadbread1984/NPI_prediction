@@ -18,9 +18,11 @@ def main(unused_argv):
   for f in listdir(FLAGS.input):
     stem, ext = splitext(f)
     if ext != '.csv': continue
-    csv = reader(join(FLAGS.input, f))
+    csv = open(join(FLAGS.input, f), 'r')
     keys = list()
-    for idx, row in enumerate(csv):
+
+    for idx, row in enumerate(csv.readlines()):
+      row = row.split(',')
       if idx == 0:
         for i in range(len(row)//2):
           head = row[i * 2]
