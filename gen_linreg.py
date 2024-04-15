@@ -41,11 +41,12 @@ def main(unused_argv):
   elif FLAGS.format == 'png':
     import matplotlib.pyplot as plt
     plt.plot(X, Y, label = 'prediction')
-    if FLAGS.sample not None:
+    if FLAGS.sample is not None:
       with open(FLAGS.sample,'rb') as f:
         samples = pickle.loads(f.read())
       xy = np.array(samples[(FLAGS.n, FLAGS.p, FLAGS.i)])
       plt.plot(xy[:,0], xy[:,1], label = 'ground truth')
+    plt.legend()
     plt.savefig('results.png')
 
 if __name__ == "__main__":
